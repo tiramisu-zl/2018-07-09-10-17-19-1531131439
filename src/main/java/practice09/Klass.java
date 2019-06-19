@@ -1,7 +1,5 @@
 package practice09;
 
-import java.lang.reflect.Array;
-
 public class Klass {
     private Number number;
     private Student leader;
