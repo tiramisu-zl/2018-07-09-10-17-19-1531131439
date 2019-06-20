@@ -6,6 +6,12 @@ public class Student extends Person{
     public Student(int id, String name, int age, Klass klass) {
         super(id, name, age);
         this.klass = klass;
+//        klass.getStudents().add(this);
+    }
+
+    public void setKlass(Klass klass) {
+//        this.klass.getStudents().remove(this);
+        this.klass = klass;
     }
 
     public Klass getKlass() {

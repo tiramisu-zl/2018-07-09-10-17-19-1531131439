@@ -27,19 +27,12 @@ public class Klass {
         return students;
     }
 
-    public void setStudents(LinkedList<Student> students) {
-        this.students = students;
-    }
-
     public String getDisplayName() {
         return String.format("Class %s", number);
     }
 
     public void appendMember(Student student) {
-        LinkedList<Student> tempStudents = this.getStudents();
-
-        tempStudents.add(student);
-        this.setStudents(tempStudents);
+        students.add(student);
         System.out.println("append success");
     }
 

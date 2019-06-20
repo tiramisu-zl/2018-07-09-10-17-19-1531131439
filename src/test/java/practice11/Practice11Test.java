@@ -169,7 +169,7 @@ public class Practice11Test {
         Teacher tom = new Teacher(1, "Tom", 21, linkedList);
         Student jerry = new Student(1, "Jerry", 8, new Klass(3));
 
-        // jerry 本来是3班的， 现在加入2班了？
+        // jerry 本来是3班的， 现在加入2班了？ new student 的时候需要对应班级add该生吗？改班级的时候需要原来班级删除该学生吗？
         klass2.appendMember(jerry);
 
         assertThat(systemOut().endsWith("I am Tom. I know Jerry has joined Class 2.\n")).isTrue();

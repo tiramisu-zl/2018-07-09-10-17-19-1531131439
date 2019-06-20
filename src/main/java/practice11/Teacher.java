@@ -16,14 +16,26 @@ public class Teacher extends Person implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        String string = "I am " + getName() + ". I know Jerry become Leader of Class 2.\n";
-        System.out.println(string);
+
+//        Class clazz = arg.getClass();
+//        if (clazz == Student.class)
+
+        if (arg instanceof Student) {
+            Student student = (Student) arg;
+            String string = "I am %s. I know %s has joined Class %d.\n";
+            System.out.printf(string, getName(), student.getName(), student.getKlass().getNumber());
+        } else if (arg instanceof Klass) {
+            Klass klass = (Klass) arg;
+            String string = "I am %s. I know %s become Leader of Class %d.\n";
+            System.out.printf(string, getName(), klass.getLeader().getName(), klass.getNumber());
+        }
     }
 
 
     public Teacher(int id, String name, int age, LinkedList<Klass> classes) {
         super(id, name, age);
         this.classes = classes;
+        classes.forEach(kc -> kc.addObserver(this));
     }
 
     public LinkedList<Klass> getClasses() {

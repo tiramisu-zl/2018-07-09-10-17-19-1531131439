@@ -1,16 +1,11 @@
 package practice11;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Observer;
+import java.util.*;
 
-public class Klass {
+public class Klass extends Observable {
     private Number number;
     private Student leader;
     private LinkedList<Student> students = new LinkedList<Student>();
-    private List<Observer> observers
-            = new ArrayList<Observer>();
 
     public Klass(Number number) {
         this.number = number;
@@ -32,34 +27,29 @@ public class Klass {
         return students;
     }
 
-    public void setStudents(LinkedList<Student> students) {
-        this.students = students;
-    }
-
     public String getDisplayName() {
         return String.format("Class %s", number);
     }
 
-    public void appendMember(Student student) {
-        LinkedList<Student> tempStudents = this.getStudents();
+    public boolean isIn (Student student) {
+        return students.contains(student);
+    }
 
-        tempStudents.add(student);
-        this.setStudents(tempStudents);
-        this.notifyAllObservers(student);
-        // 需要add observer 吗？
+    public void appendMember(Student student) {
+        students.add(student);
+        student.setKlass(this);
+
+        this.setChanged();
+        this.notifyObservers(student);
     }
 
     public void assignLeader(Student student) {
-        if (students != null && students.contains(student)) {
+        if (students != null && isIn(student)) {
             this.setLeader(student);
+            this.setChanged();
+            this.notifyObservers(this);
         } else {
             System.out.println("It is not one of us.");
-        }
-    }
-
-    public void notifyAllObservers(Student student){
-        for (Observer observer : observers) {
-            observer.update(o, student);
         }
     }
 }
